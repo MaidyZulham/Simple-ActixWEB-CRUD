@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ staff.first_name }}'s Profile</title>
+        <link rel="stylesheet" href="/assets/css/detail_staff.css">
+    </head>
+    <body>
+        <h1>Detail {{ staff.first_name }}'s Information Page</h1>
+
+        <table border="5px">
+            <tr>
+                <td>
+                    <label>ID: {{ staff.id }}</label></br>
+                    <form class="form-class" id="updateStaffForm">
+                        
+                        <label>First Name</label></br>
+                        <input type="text" name="first_name" value="{{ staff.first_name }}"></br>
+                        
+                        <label>Last Name</label></br>
+                        <input type="text" name="last_name" value="{{ staff.last_name }}"></br>
+
+                        <label>Age</label></br>
+                        <input type="number" name="age" value="{{ staff.age }}"></br>
+
+                        <label>Username</label></br>
+                        <input type="text" name="username" value="{{ staff.username }}"></br>
+
+                        <label>Email</label></br>
+                        <input type="email" name="email" value="{{ staff.email }}"></br>
+
+                        <label>Admin</label></br>
+                        <select name="is_admin">
+                            <option value="true" {% if staff.is_admin %}selected{% endif %}>Yes</option>
+                            <option value="false" {% if not staff.is_admin %}selected{% endif %}>No</option>
+                        </select></br>
+
+                        <label>Active</label></br>
+                        <select name="is_active">
+                            <option value="true" {% if staff.is_active %}selected{% endif %}>Yes</option>
+                            <option value="false" {% if not staff.is_active %}selected{% endif %}>No</option>
+                        </select></br>
+                        
+                        <button type="button" id="updateBtn">Update</button>
+                    </form>
+            
+                    <h2>Jobs</h2>
+                    {% if staff.jobs | length > 0 %}
+                        {% for job in staff.jobs %}
+                            <div style="margin-bottom:20px;">
+                                <h3>{{ job.occupation }}</h3>
+                                <p>Years of Experience: {{ job.years_of_experience }}</p>
+
+                                <h4>Specific Roles</h4>
+
+                                {% if job.specific_roles | length > 0 %}
+                                    <ul>
+                                    {% for role in job.specific_roles %}
+                                        <li>
+                                            <strong>{{ role.specific_roles_in_jobs }}</strong>
+
+                                            <ul>
+                                                <li>Managing Post Page: {{ role.staff_dashboard_access.managing_post_page }}</li>
+                                                <li>Managing Multi Social Media Post Page: {{ role.staff_dashboard_access.managing_multi_social_media_post_page }}</li>
+                                                <li>Managing User Account Page: {{ role.staff_dashboard_access.managing_user_account_page }}</li>
+                                                <li>Managing User Transaction Page: {{ role.staff_dashboard_access.managing_user_transaction_page }}</li>
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>No roles found.</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No jobs found.</p>
+                    {% endif %}
+                </td>
+                <td>
+                <form method="post" action="/account-registration-confirmation/delete/{{ staff.id }}">
+                    <button type="submit">DELETE</button>
+                </form>
+                </td>
+            </tr>
+        </table>
+        
+        <button type="submit">
+            <a href="/account-registration-confirmation">BACK</a>
+        </button>
+    </body>
+</html>

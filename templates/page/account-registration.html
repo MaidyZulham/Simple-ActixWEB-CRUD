@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Staff Registration</title>
+        <link rel="stylesheet" href="/assets/css/register-staff.css">
+    </head>
+    <body>
+        <button type="submit">
+            <a href="/">BACK</a>
+        </button>
+        <form id="staffForm">
+            <input type="text" id="first_name" placeholder="First Name" required>
+            <input type="text" id="last_name" placeholder="Last Name" required>
+            <input type="number" id="age" placeholder="25" required>
+            <input type="text" id="username" placeholder="username12" required>
+            <input type="email" id="email" placeholder="example@mail.com" required>
+            <input type="password" id="password" placeholder="My Secret Password" required><br>
+
+            <label>Admin :</label>
+            <input type="checkbox" id="is_admin"><br>
+
+            <label>Active :</label>
+            <input type="checkbox" id="is_active"><br>
+
+            <hr>
+
+            <label>Occupation</label><br>
+            <input type="text" id="occupation" placeholder="Occupation"><br>
+
+            <label>Years of Experience</label><br>
+            <input type="number" id="years_of_experience"  placeholder="2 or 5 etc"><br>
+
+            <label>Specific Role in Job</label><br>
+            <input type="text" id="specific_role"  placeholder="Probabilistic for Machine Learning or etc"><br>
+
+            <h3>STAFF DASHBOARD ACCESS PAGE FACILITIES</h3><br>
+
+            <label>Managing Post</label><br>
+            <select id="managing_post_page">
+                <option value="NONE">NONE</option>
+                <option value="READ">READ</option>
+                <option value="WRITE">WRITE</option>
+                <option value="FULL">FULL</option>
+            </select><br>
+
+            <label>Managing Multi Social Media Post</label><br>
+            <select id="managing_multi_social_media_post_page">
+                <option value="NONE">NONE</option>
+                <option value="READ">READ</option>
+                <option value="WRITE">WRITE</option>
+                <option value="FULL">FULL</option>
+            </select><br>
+
+            <label>Managing User Account</label><br>
+            <select id="managing_user_account_page">
+                <option value="NONE">NONE</option>
+                <option value="READ">READ</option>
+                <option value="WRITE">WRITE</option>
+                <option value="FULL">FULL</option>
+            </select><br>
+
+            <label>Managing User Transaction</label><br>
+            <select id="managing_user_transaction_page">
+                <option value="NONE">NONE</option>
+                <option value="READ">READ</option>
+                <option value="WRITE">WRITE</option>
+                <option value="FULL">FULL</option>
+            </select><br>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+
+        <h3>See The List of Staffs</h3>
+        <button type="submit">
+            <a href="/account-registration-confirmation">CLICK</a>
+        </button>
+
+        <script>
+        document.getElementById("staffForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const payload = {
+                first_name: document.getElementById("first_name").value,
+                last_name: document.getElementById("last_name").value,
+                age: parseInt(document.getElementById("age").value),
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                is_admin: document.getElementById("is_admin").checked,
+                is_active: document.getElementById("is_active").checked,
+                jobs: [
+                    {
+                        occupation: document.getElementById("occupation").value,
+                        years_of_experience: parseInt(document.getElementById("years_of_experience").value),
+                        specific_roles: [
+                            {
+                                specific_roles_in_jobs: document.getElementById("specific_role").value,
+                                staff_dashboard_access: {
+                                    managing_post_page: document.getElementById("managing_post_page").value,
+                                    managing_multi_social_media_post_page: document.getElementById("managing_multi_social_media_post_page").value,
+                                    managing_user_account_page: document.getElementById("managing_user_account_page").value,
+                                    managing_user_transaction_page: document.getElementById("managing_user_transaction_page").value
+                                }
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            const response = await fetch("/account-registration-confirmation", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            console.log(result);
+        });
+        </script>
+    </body>
+</html>

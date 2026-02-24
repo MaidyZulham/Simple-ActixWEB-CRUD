@@ -1,0 +1,9 @@
+body {
+    background-color: #181818;
+    color: yellow;
+}
+
+input {
+    border: wheat solid 1px;
+    background: wheat;
+}

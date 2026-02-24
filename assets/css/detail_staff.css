@@ -1,0 +1,17 @@
+body {
+    background-color: #181818;
+    color: yellow;
+}
+
+input {
+    width: 300px;
+}
+
+label {
+    padding: 20px;
+}
+
+.form-class {
+    border: rgb(255, 177, 61) double 3px;
+    width: 600px;
+}

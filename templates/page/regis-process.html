@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>List of Staffs</title>
+        <link rel="stylesheet" href="/assets/css/users_list_page.css">
+    </head>
+    <body>
+        <h1>Staff Member</h1>
+        {% for staff in staffs %}
+        <div>
+            <p>id: {{ staff.id }}</p>
+            <p>first name: {{ staff.first_name }}</p>
+            <p>last name: {{ staff.last_name }}</p>
+            <p>email: {{ staff.email }}</p>
+            <button>
+                <a href="/account-registration-confirmation/{{ staff.id }}">DETAIL</a>
+            </button>
+        </div>
+        {% endfor %}
+        <hr>
+        <h3>Previous Page:</h3><br>
+        <button type="submit"><a href="/register-account">BACK</a></button>
+    </body>
+</html>
